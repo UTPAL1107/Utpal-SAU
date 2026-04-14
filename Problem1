@@ -1,0 +1,38 @@
+let L = parseInt(prompt("Enter L:"));
+let R = parseInt(prompt("Enter R:"));
+let K = parseInt(prompt("Enter K:"));
+
+function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) return false;
+    }
+    return true;
+}
+
+function digitSum(n) {
+    let s = 0;
+    while (n > 0) {
+        s += n % 10;
+        n = Math.floor(n / 10);
+    }
+    return s;
+}
+
+function hasZeroDigit(n) {
+    while (n > 0) {
+        if (n % 10 === 0) return true;
+        n = Math.floor(n / 10);
+    }
+    return false;
+}
+
+let count = 0;
+let start = Math.ceil(L / K) * K; // jump to first multiple of K in range
+for (let x = start; x <= R; x += K) {
+    if (!hasZeroDigit(x) && isPrime(digitSum(x))) {
+        count++;
+    }
+}
+
+alert(count);
